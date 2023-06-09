@@ -45,7 +45,7 @@ ls(char *path)
   case T_FILE:
     printf("%s %d %d %l\n", fmtname(path), st.type, st.ino, st.size);
     break;
-
+  // if st.type is directory
   case T_DIR:
     if(strlen(path) + 1 + DIRSIZ + 1 > sizeof buf){
       printf("ls: path too long\n");
@@ -53,7 +53,7 @@ ls(char *path)
     }
     strcpy(buf, path);
     p = buf+strlen(buf);
-    *p++ = '/';
+    *p++ = '/'; // p point to the end of buf
     while(read(fd, &de, sizeof(de)) == sizeof(de)){
       if(de.inum == 0)
         continue;
